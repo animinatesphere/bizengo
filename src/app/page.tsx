@@ -243,7 +243,7 @@ const Index = () => {
           <div className="absolute bottom-20 right-20 w-20 h-20 border-2 border-orange-400 rotate-45"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 w-full mt-[6rem]  ">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 w-full mt-[6rem]  lg:p-[1rem]">
           {/* Left side - Text content */}
           <div className="flex-1 max-w-2xl">
             <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-6">
@@ -279,7 +279,7 @@ const Index = () => {
             <div className="relative w-full flex justify-center">
               {/* Tablet frame */}
               <div
-                className="bg-slate-800 p-3 sm:p-4 md:p-6 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 w-[90vw] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+                className="bg-slate-800 p-3 sm:p-4 md:p-6 rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 w-[90vw] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg animate-float"
                 style={{ minWidth: "0" }}
               >
                 <div className="bg-white rounded-2xl p-3 sm:p-4 md:p-6 w-full h-56 sm:h-64 md:h-72 lg:h-80 overflow-hidden">

@@ -10,7 +10,7 @@ export default function Navbar2() {
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   return (
     <>
-      <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-white bg-opacity-95 backdrop-blur-md shadow-sm px-8 py-6">
+      <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-[#f1ece5] bg-opacity-95 backdrop-blur-md shadow-sm px-8 py-6">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-2">
             <Link href="/" className="focus:outline-none">
@@ -105,12 +105,12 @@ export default function Navbar2() {
               className="border-none bg-transparent w-full justify-start"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <Link href="#">About</Link>
+              <Link href="/about">About</Link>
             </Button>
             {isLoggedIn ? (
               <Button
                 asChild
-                className="bg-[#16274e] hover:bg-[#141d31] text-white w-full justify-start"
+                className="bg-white text-black border border-gray-300 hover:bg-gray-100 w-full justify-start"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <Link href="/about">About</Link>
@@ -120,35 +120,35 @@ export default function Navbar2() {
                 <Button
                   variant="outline"
                   asChild
-                  className="hover:bg-gray-50 transition-colors duration-300 w-full justify-start"
+                  className="bg-white text-black border border-gray-300 hover:bg-gray-100 transition-colors duration-300 w-full justify-start"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link href="/contact">Contact</Link>
                 </Button>
                 <Button
                   asChild
-                  className="bg-[#16274e] hover:bg-[#141d31] text-white w-full justify-start"
+                  className="bg-white text-black border border-gray-300 hover:bg-gray-100 w-full justify-start"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link href="/get">Tools</Link>
                 </Button>
                 <Button
                   asChild
-                  className="bg-[#16274e] hover:bg-[#141d31] text-white w-full justify-start"
+                  className=" bg-white text-black border border-gray-300 hover:bg-gray-100 w-full justify-start"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link href="/blog">Blog</Link>
                 </Button>
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 text-white w-full justify-start"
+                  className="bg-[#16274e] text-white w-full justify-start"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link href="/auth/signup">Signup</Link>
                 </Button>
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-700 hover:to-blue-500 text-white w-full justify-start"
+                  className="bg-[#16274e] text-white w-full justify-start"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link href="/auth/login">Login</Link>
