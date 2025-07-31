@@ -20,45 +20,53 @@ export default function AboutPage() {
               <div className="absolute w-28 h-20 top-8 left-8 bg-gradient-to-br from-blue-200 to-blue-400 rounded-full opacity-60"></div>
             </div>
           </div>
-          <Card className="bg-white rounded-tr-[10rem] z-0 shadow-xl p-6 md:p-10 w-full mx-auto flex flex-col items-center justify-center text-center">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-center px-2 sm:px-0 break-words">
+          <Card className="bg-white rounded-tr-[10rem] z-0 shadow-xl p-6 md:p-10 w-full mx-auto flex flex-col items-center justify-center text-left sm:text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 text-left sm:text-center px-2 sm:px-0 break-words">
               Built for Africa's Boldest Businesses
             </h2>
-            <p className="text-gray-700 mb-4 text-base md:text-lg text-center">
-              Bizengo is a smart business suite tailored to empower <br /> SMEs
-              and freelancers across Africa with worldale tools <br /> to
-              simplify operations, finance, inventory, and <br /> planning.
+            <p className="text-gray-700 mb-4 text-base md:text-lg text-left sm:text-center">
+              Bizengo is a smart business suite tailored to empower{" "}
+              <br className="sm:hidden" /> SMEs and freelancers across Africa
+              with worldale tools <br className="sm:hidden" /> to simplify
+              operations, finance, inventory, and <br className="sm:hidden" />{" "}
+              planning.
             </p>
-            <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 text-center">
+            <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 text-left sm:text-center">
               Run Smarter. Grow Faster. Stay in Control.
             </h3>
-            <p className="text-gray-700 mb-6 text-base md:text-lg text-center">
-              From sales to research. Bizengo is locally inspired, <br />{" "}
+            <p className="text-gray-700 mb-6 text-base md:text-lg text-left sm:text-center">
+              From sales to research. Bizengo is locally inspired,{" "}
+              <br className="sm:hidden" />
               globally built — world help you thrive on your terms
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6 w-full max-w-2xl mx-auto justify-center text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6 w-full max-w-2xl mx-auto justify-center text-left sm:text-center">
               <div className="bg-[#f6f8fa] rounded-xl p-4 sm:p-6 shadow group flex flex-col items-center text-center w-full md:w-fit">
                 <div className="flex items-center justify-center w-fit p-1 rounded-full mb-3 bg-amber-600 ">
                   <FileText className="h-7 w-7 md:h-8 md:w-8 text-white" />
                 </div>
-                <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 text-center">
+                <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 text-left sm:text-center">
                   For Small Businesses
                 </h4>
-                <ul className="list-none space-y-2 text-gray-700 text-xs md:text-sm text-center">
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Track sales, inventory, and suppliers with ease
+                <ul className="list-none space-y-2 text-gray-700 text-xs md:text-sm text-left sm:text-center">
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Track
+                    sales, inventory, and suppliers with ease
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Automate bulk order calculations and restocking
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Automate
+                    bulk order calculations and restocking
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Access smart reports to guide every decision
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Access
+                    smart reports to guide every decision
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Manage debtors, pricing, and trends in one place
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Manage
+                    debtors, pricing, and trends in one place
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Research tools to understand market dimands
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Research
+                    tools to understand market dimands
                   </li>
                 </ul>
               </div>
@@ -66,24 +74,29 @@ export default function AboutPage() {
                 <div className="flex items-center justify-center w-fit p-1 rounded-full bg-amber-600 mb-3 ">
                   <ClipboardList className="h-7 w-7 md:h-8 md:w-8 text-white" />
                 </div>
-                <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 text-center">
+                <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 text-left sm:text-center">
                   For Freelancers on the Move
                 </h4>
-                <ul className="list-none space-y-2 text-gray-700 text-xs md:text-sm text-center">
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Send instant invoices and receipts in minutes
+                <ul className="list-none space-y-2 text-gray-700 text-xs md:text-sm text-left sm:text-center">
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Send
+                    instant invoices and receipts in minutes
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Monitor cash flow, expenses, and project
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Monitor
+                    cash flow, expenses, and project
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Manage inventory for many products or services easily
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Manage
+                    inventory for many products or services easily
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Track creditors and get payment alerts on time
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Track
+                    creditors and get payment alerts on time
                   </li>
-                  <li className="flex items-center gap-2 justify-center">
-                    <span className="text-blue-600 font-bold">✓</span>Calculate bulk orders and offer client discounts
+                  <li className="flex items-center gap-2 justify-start sm:justify-center">
+                    <span className="text-blue-600 font-bold">✓</span>Calculate
+                    bulk orders and offer client discounts
                   </li>
                 </ul>
               </div>

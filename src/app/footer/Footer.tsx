@@ -87,7 +87,7 @@ export default function Footer() {
             <ul className="flex flex-wrap justify-center gap-x-8 sm:gap-x-16  gap-y-4 text-sm text-white">
               <li>
                 <a
-                  href="https://rootsnsquares.com/#contact"
+                  href="/contact"
                   className="text-white hover:text-blue-200 font-semibold transition-colors duration-200"
                 >
                   Contact
@@ -95,15 +95,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://rootsnsquares.com/"
+                  href="/about"
                   className="text-white hover:text-blue-200 font-semibold transition-colors duration-200"
                 >
-                  Home
+                  About
                 </a>
               </li>
               <li>
                 <Link
-                  href="/"
+                  href="/get"
                   className="text-white hover:text-blue-200 font-semibold transition-colors duration-200"
                 >
                   Tools
@@ -122,13 +122,13 @@ export default function Footer() {
         </div>
       </footer>
 
-      <p className="text-center text-white text-sm my-8">
+      <p className="text-center text-amber-600 text-sm my-8">
         Copyright © {new Date().getFullYear()}{" "}
         <a
           href="https://rootsnsquares.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-white hover:text-blue-200 hover:underline font-semibold transition-colors duration-200"
+          className="text-amber-600 hover:underline font-semibold transition-colors duration-200"
         >
           Roots & Squares Consulting
         </a>

@@ -10,7 +10,7 @@ export default function Navbar2() {
   const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
   return (
     <>
-      <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-[#f1ece5] bg-opacity-95 backdrop-blur-md shadow-sm px-8 py-6">
+      <nav className="fixed left-0 right-0 top-0 z-50 w-full bg-[#f1ece5] bg-opacity-95 backdrop-blur-md shadow-sm px-5 py-3">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-2">
             <Link href="/" className="focus:outline-none">
