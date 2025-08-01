@@ -120,13 +120,14 @@ export default function NavBar() {
                     </Button>
                   ) : (
                     <>
-                      <Button variant="outline" asChild className="w-full">
+                      <Button
+                        variant="outline"
+                        asChild
+                        className="w-full bg-[#16274e] text-white"
+                      >
                         <Link href="/auth/login">Login</Link>
                       </Button>
-                      <Button
-                        asChild
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 w-full"
-                      >
+                      <Button asChild className="bg-[#16274e] w-full">
                         <Link href="/auth/signup">Sign Up</Link>
                       </Button>
                     </>
@@ -186,15 +187,16 @@ export default function NavBar() {
                 </Button>
               </div>
             ) : (
-              <div className="flex gap-2 ml-4 border-l pl-4">
-                <Button variant="outline" size="sm" asChild>
-                  <Link href="/auth/login">Login</Link>
-                </Button>
+              <div className="flex gap-2 ml-4 border-l pl-4 ">
                 <Button
+                  variant="outline"
                   size="sm"
                   asChild
-                  className="bg-gradient-to-r from-blue-600 to-purple-600"
+                  className="bg-[#16274e] text-white"
                 >
+                  <Link href="/auth/login">Login</Link>
+                </Button>
+                <Button size="sm" asChild className="bg-[#16274e] text-white">
                   <Link href="/auth/signup">Sign Up</Link>
                 </Button>
               </div>

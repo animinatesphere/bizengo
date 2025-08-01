@@ -46,7 +46,7 @@ export default function page() {
       <div className="container mx-auto px-4 pt-12">
         <Navbar2 />
         <div className="text-center mb-16 mt-20">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-amber-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
             <Sparkles className="h-4 w-4" />
             Essential Business Management Tools
           </div>
@@ -252,6 +252,37 @@ export default function page() {
               </Button>
             </div>
           </Card>
+        </div>
+        {/* note3 */}
+        <div className="flex items-center justify-center mt-7">
+          <p className="text-center text-[16px] sm:text-[18px] md:text-[23px] lg:text-[33px] font-bold ">
+            Ready to grow your business the smarter way?
+          </p>
+        </div>
+
+        {/* end of note3 */}
+
+        {/* note4 */}
+        <div className="flex items-center justify-center gap-3 mt-8 mb-4">
+          <Link href="/contact">
+            <Button
+              asChild
+              className="bg-amber-600 hover:bg-[#16274e] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+              size="lg"
+            >
+              <span>Get Started</span>
+            </Button>
+          </Link>
+
+          <Link href="/about">
+            <Button
+              asChild
+              className="bg-[#16274e] hover:bg-[#141d31] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+              size="lg"
+            >
+              <span>Learn More</span>
+            </Button>
+          </Link>
         </div>
         <Footer />
       </div>
