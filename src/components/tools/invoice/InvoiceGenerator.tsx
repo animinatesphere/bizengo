@@ -913,6 +913,8 @@ export const InvoiceGenerator = () => {
               tax={tax}
               selectedTemplate={selectedTemplate || ""}
               total={total}
+              // Pass the uploaded logo for display in the generated invoice/receipt
+              uploadedLogo={businessLogo}
             />
           </div>
         </>
