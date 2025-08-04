@@ -916,6 +916,7 @@ export const InvoiceGenerator = () => {
               // Pass the uploaded logo for display in the generated invoice/receipt
               uploadedLogo={businessLogo}
             />
+            {/* goood */}
           </div>
         </>
       )}
