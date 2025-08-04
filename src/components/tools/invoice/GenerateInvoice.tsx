@@ -98,7 +98,7 @@ const GenerateInvoice = ({
   tax: number | null;
   selectedTemplate: string;
   total: number;
-  uploadLogo?: string; // Optional prop for uploading logo
+  uploadedLogo?: string; // Optional prop for uploading logo
 }) => {
   const [qrCode, setQrCode] = useState<string | null>(null); // Initialized to null
   const [viewQRCodePopup, setViewQRCodePopup] = useState(false);
