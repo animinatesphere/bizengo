@@ -89,7 +89,6 @@ export const InvoiceGenerator = () => {
   const [businessIdentifier, setBusinessIdentifier] = useState("");
   const [businessIdentifierNumber, setBusinessIdentifierNumber] = useState("");
   const [businessLogo, setBusinessLogo] = useState<string | null>(null);
-  // const [uploadedLogo, setuploadedLogo] = useState<string | null>(null);
   const [customerName, setCustomerName] = useState("");
   const [customerAddress, setCustomerAddress] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -914,7 +913,7 @@ export const InvoiceGenerator = () => {
               tax={tax}
               selectedTemplate={selectedTemplate || ""}
               total={total}
-              // Pass the uploaded logo for display in the generated invoices/receipt
+              // Pass the uploaded logo for display in the generated invoice/receipt
               // uploadedLogo={businessLogo}
             />
           </div>
