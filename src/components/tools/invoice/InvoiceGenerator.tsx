@@ -107,6 +107,8 @@ export const InvoiceGenerator = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [smartSuggestions, setSmartSuggestions] = useState<string[]>([]);
   const [showPreview, setShowPreview] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
 
