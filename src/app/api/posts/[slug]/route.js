@@ -1,12 +1,12 @@
 // app/posts/[slug]/page.js
-import { NotionBlog } from "../../../lib/notion";
+import { NotionBlog } from "@/lib/notion";
 
 // Generate static params for all posts
 export async function generateStaticParams() {
   try {
     const blog = new NotionBlog();
     const posts = await blog.getAllPosts();
-    
+
     return posts.map((post) => ({
       slug: post.slug,
     }));
@@ -21,10 +21,10 @@ export async function generateMetadata({ params }) {
   try {
     const blog = new NotionBlog();
     const post = await blog.getPostBySlug(params.slug);
-    
+
     if (!post) {
       return {
-        title: 'Post Not Found',
+        title: "Post Not Found",
       };
     }
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
     };
   } catch (error) {
     return {
-      title: 'Error Loading Post',
+      title: "Error Loading Post",
     };
   }
 }
@@ -72,4 +72,4 @@ export default async function PostPage({ params }) {
       </div>
     );
   }
-} 
+}
