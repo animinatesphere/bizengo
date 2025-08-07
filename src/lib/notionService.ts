@@ -5,12 +5,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   try {
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
-      filter: {
-        property: "Published",
-        checkbox: {
-          equals: true,
-        },
-      },
+      // Remove filter for now to get all posts, or adjust based on your property names
       sorts: [
         {
           property: "Date",
@@ -33,20 +28,10 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        and: [
-          {
-            property: "Published",
-            checkbox: {
-              equals: true,
-            },
-          },
-          {
-            property: "Slug",
-            rich_text: {
-              equals: slug,
-            },
-          },
-        ],
+        property: "Slug",
+        rich_text: {
+          equals: slug,
+        },
       },
     });
 
@@ -69,16 +54,22 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   }
 }
 
-function transformNotionPageToBlogPost(page: NotionPage): BlogPost {
+function transformNotionPageToBlogPost(page: any): BlogPost {
+  // Log the page properties to see what's available
+  console.log("Page properties:", Object.keys(page.properties));
+
   return {
     id: page.id,
-    title: page.properties.Title.title[0]?.plain_text || "Untitled",
-    slug: page.properties.Slug.rich_text[0]?.plain_text || "",
-    published: page.properties.Published.checkbox,
-    date: page.properties.Date.date?.start || "",
-    tags: page.properties.Tags.multi_select.map((tag) => tag.name),
+    title:
+      page.properties.Title?.title[0]?.plain_text ||
+      page.properties.Name?.title[0]?.plain_text ||
+      "Untitled",
+    slug: page.properties.Slug?.rich_text[0]?.plain_text || "",
+    published: page.properties.Published?.checkbox ?? true,
+    date: page.properties.Date?.date?.start || new Date().toISOString(),
+    tags: page.properties.Tags?.multi_select?.map((tag: any) => tag.name) || [],
     featuredImage:
-      page.properties["Featured Image"].files[0]?.file?.url ||
-      page.properties["Featured Image"].files[0]?.external?.url,
+      page.properties["Featured Image"]?.files[0]?.file?.url ||
+      page.properties["Featured Image"]?.files[0]?.external?.url,
   };
 }
