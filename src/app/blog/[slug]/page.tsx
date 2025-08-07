@@ -1,4 +1,4 @@
-import notion from "./notion";
+import notion from "@/lib/notion";
 import { BlogPost } from "@/types/notion";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
