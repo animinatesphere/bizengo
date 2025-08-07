@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     ".next/types/app/blog/[slug]/page.tsx",
     ".next/types/app/blog/[slug]/page.js",
-    "src/lib/notion.js"
+    "src/lib/notion.ts"
   ],
   "exclude": ["node_modules"]
 }
