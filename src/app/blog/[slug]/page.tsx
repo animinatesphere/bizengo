@@ -1,10 +1,28 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import { Metadata } from "next";
 import { NotionBlog } from "../../../lib/notion";
 
+// Define the props interface
+interface BlogPostProps {
+  params: {
+    slug: string;
+  };
+}
+
+// Define the post type (adjust based on your NotionBlog implementation)
+interface BlogPost {
+  title: string;
+  content: string;
+  date: string;
+  slug: string;
+  featuredImage?: string;
+  tags: string[];
+}
+
 // Server Component
-export default async function BlogPost({ params }) {
+export default async function BlogPost({ params }: BlogPostProps) {
   const blog = new NotionBlog();
   const post = await blog.getPostBySlug(params.slug);
 
@@ -12,6 +30,10 @@ export default async function BlogPost({ params }) {
   if (!post) {
     notFound();
   }
+
+  // Debug: Check what properties the post actually has
+  console.log("Post object:", post);
+  console.log("Post keys:", Object.keys(post));
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -51,7 +73,7 @@ export default async function BlogPost({ params }) {
 
             {post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
+                {post.tags.map((tag: string) => (
                   <span
                     key={tag}
                     className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full font-medium"
@@ -111,7 +133,10 @@ export default async function BlogPost({ params }) {
               ),
             }}
           >
-            {post.content}
+            {(post as any).content ||
+              (post as any).body ||
+              (post as any).markdown ||
+              "No content available"}
           </ReactMarkdown>
         </div>
       </article>
@@ -120,7 +145,7 @@ export default async function BlogPost({ params }) {
 }
 
 // Generate static params for all posts
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const blog = new NotionBlog();
   const posts = await blog.getAllPosts();
 
@@ -130,7 +155,9 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }) {
+export async function generateMetadata({
+  params,
+}: BlogPostProps): Promise<Metadata> {
   const blog = new NotionBlog();
   const post = await blog.getPostBySlug(params.slug);
 
