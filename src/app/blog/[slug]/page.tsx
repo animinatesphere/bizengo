@@ -40,7 +40,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </div>
       <div className="prose max-w-none">
-        <p>Content will be rendered here...</p>
+        <p>Content will be rendered here..</p>
       </div>
     </div>
   );
