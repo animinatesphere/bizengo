@@ -1,12 +1,15 @@
-// lib/notion.js - Simplified Notion API client
+// lib/notion.ts - Simplified Notion API client
 import { Client } from "@notionhq/client";
 
 export class NotionBlog {
+  private notion: Client;
+  private databaseId: string;
+
   constructor() {
     this.notion = new Client({
       auth: process.env.NOTION_TOKEN,
     });
-    this.databaseId = process.env.NOTION_DATABASE_ID;
+    this.databaseId = process.env.NOTION_DATABASE_ID || "";
   }
 
   async getAllPosts() {
@@ -30,7 +33,7 @@ export class NotionBlog {
     }
   }
 
-  async getPostBySlug(slug) {
+  async getPostBySlug(slug: string) {
     try {
       // Get all posts first, then find by slug
       const allPosts = await this.getAllPosts();
@@ -42,16 +45,18 @@ export class NotionBlog {
 
       // Get content for this post
       const content = await this.getPageContent(post.id);
-      post.content = content;
 
-      return post;
+      return {
+        ...post,
+        content: content,
+      };
     } catch (error) {
       console.error("Error fetching post:", error);
       return null;
     }
   }
 
-  async getPageContent(pageId) {
+  async getPageContent(pageId: string) {
     try {
       const response = await this.notion.blocks.children.list({
         block_id: pageId,
@@ -66,31 +71,31 @@ export class NotionBlog {
     }
   }
 
-  formatPost(page) {
+  private formatPost(page: any) {
     const properties = page.properties;
 
     // Safely get properties - handles missing properties gracefully
-    const getTextProperty = (prop) => {
+    const getTextProperty = (prop: any) => {
       return prop?.rich_text?.[0]?.plain_text || "";
     };
 
-    const getTitleProperty = (prop) => {
+    const getTitleProperty = (prop: any) => {
       return prop?.title?.[0]?.plain_text || "Untitled";
     };
 
-    const getCheckboxProperty = (prop) => {
+    const getCheckboxProperty = (prop: any) => {
       return prop?.checkbox || false;
     };
 
-    const getDateProperty = (prop) => {
+    const getDateProperty = (prop: any) => {
       return prop?.date?.start || "";
     };
 
-    const getMultiSelectProperty = (prop) => {
-      return prop?.multi_select?.map((tag) => tag.name) || [];
+    const getMultiSelectProperty = (prop: any) => {
+      return prop?.multi_select?.map((tag: any) => tag.name) || [];
     };
 
-    const getFileProperty = (prop) => {
+    const getFileProperty = (prop: any) => {
       return (
         prop?.files?.[0]?.file?.url || prop?.files?.[0]?.external?.url || null
       );
@@ -117,10 +122,11 @@ export class NotionBlog {
         ) || true, // Default to true if no Published field
       createdAt: page.created_time,
       updatedAt: page.last_edited_time,
+      content: "", // Initialize content as empty string
     };
   }
 
-  formatBlock(block) {
+  private formatBlock(block: any) {
     const { type } = block;
 
     switch (type) {
@@ -153,7 +159,7 @@ export class NotionBlog {
       case "image":
         const imageUrl = block.image.file?.url || block.image.external?.url;
         const caption =
-          block.image.caption?.map((c) => c.plain_text).join("") || "";
+          block.image.caption?.map((c: any) => c.plain_text).join("") || "";
         return `![${caption}](${imageUrl})`;
 
       default:
@@ -161,7 +167,7 @@ export class NotionBlog {
     }
   }
 
-  formatRichText(richText) {
+  private formatRichText(richText: any[]) {
     return richText
       .map((text) => {
         let formattedText = text.plain_text;
