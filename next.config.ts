@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Remove output: "export" - this is causing the issue
+  // output: "export", ← REMOVE THIS LINE COMPLETELY
   images: {
-    unoptimized: true, // Keep this if you want unoptimized images
+    unoptimized: true,
   },
 };
 
