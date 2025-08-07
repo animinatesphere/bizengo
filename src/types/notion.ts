@@ -9,41 +9,9 @@ export interface BlogPost {
   content?: any; // Notion blocks
 }
 
-export interface NotionPage {
+// Use the actual Notion API types
+export type NotionPage = {
   id: string;
-  properties: {
-    Title: {
-      title: Array<{
-        plain_text: string;
-      }>;
-    };
-    Slug: {
-      rich_text: Array<{
-        plain_text: string;
-      }>;
-    };
-    Published: {
-      checkbox: boolean;
-    };
-    Date: {
-      date: {
-        start: string;
-      } | null;
-    };
-    Tags: {
-      multi_select: Array<{
-        name: string;
-      }>;
-    };
-    "Featured Image": {
-      files: Array<{
-        file?: {
-          url: string;
-        };
-        external?: {
-          url: string;
-        };
-      }>;
-    };
-  };
-}
+  properties: Record<string, any>;
+  [key: string]: any;
+};
