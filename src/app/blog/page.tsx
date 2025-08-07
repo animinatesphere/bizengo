@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NotionBlog } from "../../lib/notion";
+import { NotionBlog } from "@/lib/notion";
 import { Metadata } from "next";
 
 // Define the blog post interface

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
-import { NotionBlog } from "../../../lib/notion";
+import { NotionBlog } from "@/lib/notion";
 
 // Update the props interface for Next.js 15
 interface BlogPostProps {
