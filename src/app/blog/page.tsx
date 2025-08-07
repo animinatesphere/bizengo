@@ -1,10 +1,21 @@
 import Link from "next/link";
 import { NotionBlog } from "../../lib/notion";
+import { Metadata } from "next";
+
+// Define the blog post interface
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  featuredImage?: string;
+  tags: string[]; // Explicitly type tags as string array
+}
 
 // This is a Server Component - runs on the server
 export default async function BlogPage() {
   const blog = new NotionBlog();
-  const posts = await blog.getAllPosts();
+  const posts: BlogPost[] = await blog.getAllPosts(); // Type the posts array
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -25,7 +36,7 @@ export default async function BlogPage() {
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
+            {posts.map((post: BlogPost) => (
               <article
                 key={post.id}
                 className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
@@ -55,9 +66,9 @@ export default async function BlogPage() {
                       day: "numeric",
                     })}
                   </p>
-                  {post.tags.length > 0 && (
+                  {post.tags && post.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
+                      {post.tags.map((tag: string) => (
                         <span
                           key={tag}
                           className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium"
@@ -80,8 +91,8 @@ export default async function BlogPage() {
 // Enable static generation with revalidation
 export const revalidate = 60; // Revalidate every 60 seconds
 
-// Optional: Add metadata
-export async function generateMetadata() {
+// Optional: Add metadata with proper typing
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "My Blog - Powered by Notion",
     description: "A blog powered by Notion API",
