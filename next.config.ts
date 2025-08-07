@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
-/** @type {import('next').NextConfig} */
+
 const nextConfig: NextConfig = {
-  output: "export",
+  // Remove output: "export" - this is causing the issue
   images: {
-    unoptimized: true,
+    unoptimized: true, // Keep this if you want unoptimized images
   },
 };
 
