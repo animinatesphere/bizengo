@@ -4,11 +4,10 @@ import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 import { NotionBlog } from "../../../lib/notion";
 
-// Define the props interface
+// Update the props interface for Next.js 15
 interface BlogPostProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>; // params is now a Promise
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // Define the post type (adjust based on your NotionBlog implementation)
@@ -23,8 +22,11 @@ interface BlogPost {
 
 // Server Component
 export default async function BlogPost({ params }: BlogPostProps) {
+  // Await the params Promise
+  const { slug } = await params;
+
   const blog = new NotionBlog();
-  const post = await blog.getPostBySlug(params.slug);
+  const post = await blog.getPostBySlug(slug); // Now use the awaited slug
 
   // If post not found, show 404
   if (!post) {
@@ -71,7 +73,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
               })}
             </time>
 
-            {post.tags.length > 0 && (
+            {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag: string) => (
                   <span
@@ -154,12 +156,15 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
-// Generate metadata for SEO
+// Generate metadata for SEO - also needs to await params
 export async function generateMetadata({
   params,
 }: BlogPostProps): Promise<Metadata> {
+  // Await the params Promise here too
+  const { slug } = await params;
+
   const blog = new NotionBlog();
-  const post = await blog.getPostBySlug(params.slug);
+  const post = await blog.getPostBySlug(slug);
 
   if (!post) {
     return {
