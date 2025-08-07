@@ -38,9 +38,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     if (response.results.length === 0) return null;
 
+    // Filter and find the first valid page
     const page = response.results.find(
       (page): page is PageObjectResponse => "properties" in page
     );
+
     if (!page) return null;
 
     const post = transformNotionPageToBlogPost(page);

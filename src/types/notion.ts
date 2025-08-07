@@ -1,3 +1,4 @@
+// src/types/notion.ts
 export interface BlogPost {
   id: string;
   title: string;
@@ -8,10 +9,3 @@ export interface BlogPost {
   featuredImage?: string;
   content?: any; // Notion blocks
 }
-
-// Use the actual Notion API types
-export type NotionPage = {
-  id: string;
-  properties: Record<string, any>;
-  [key: string]: any;
-};
