@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-// import { NotionBlog } from "../../../lib/notion";
 import { NotionBlog } from "@/lib/notion";
 // Add these exports for static generation
 export const dynamic = "force-static";
