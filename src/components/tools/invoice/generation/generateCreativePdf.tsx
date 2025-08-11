@@ -374,6 +374,12 @@ export const CreativeInvoiceDocument: React.FC<
             <Text style={styles.text}>Customer: {data.customerName}</Text>
             <Text style={styles.text}>Address: {data.customerAddress}</Text>
             <Text style={styles.text}>Phone: {data.customerPhone}</Text>
+            <Text style={styles.businessInfo}>
+              {data.invoiceType === "invoice"
+                ? "Invoice Number: "
+                : "Receipt Number: "}
+              {data.businessIdentifierNumber}
+            </Text>
           </View>
 
           <View style={styles.table}>

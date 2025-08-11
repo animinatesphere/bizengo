@@ -315,6 +315,12 @@ export const ClassicInvoiceDocument: React.FC<ClassicInvoiceDocumentProps> = ({
             Invoice Date: {formatDate(new Date())}
           </Text>
           <View style={styles.smallUnderline} />
+          <Text style={styles.businessInfo}>
+            {data.invoiceType === "invoice"
+              ? "Invoice Number: "
+              : "Receipt Number: "}
+            {data.businessIdentifierNumber}
+          </Text>
         </View>
 
         <View style={styles.table}>

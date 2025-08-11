@@ -416,9 +416,14 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
           <Text style={styles.businessName}>{data.businessName}</Text>
           <Text style={styles.businessInfo}>{data.businessAddress}</Text>
           <Text style={styles.businessInfo}>Phone: {data.businessPhone}</Text>
-          <Text style={styles.invoiceTitle}>
-            {data.invoiceType === "invoice" ? "INVOICE" : "RECEIPT"}
-          </Text>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>
+              {data.invoiceType === "invoice" ? "Invoice #:" : "Receipt #:"}
+            </Text>
+            <Text style={styles.infoValue}>
+              {data.businessIdentifierNumber}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.section}>

@@ -340,9 +340,14 @@ export const MinimalInvoiceDocument: React.FC<MinimalInvoiceDocumentProps> = ({
           </View>
           <Text style={styles.businessInfo}>{data.businessAddress}</Text>
           <Text style={styles.businessInfo}>Tel: {data.businessPhone}</Text>
-          <Text style={styles.invoiceTitle}>
-            {data.invoiceType === "invoice" ? "Invoice" : "Receipt"}
-          </Text>
+          <View style={styles.infoRow}>
+            <Text style={styles.infoLabel}>
+              {data.invoiceType === "invoice" ? "Invoice #:" : "Receipt #:"}
+            </Text>
+            <Text style={styles.infoValue}>
+              {data.businessIdentifierNumber}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.section}>
