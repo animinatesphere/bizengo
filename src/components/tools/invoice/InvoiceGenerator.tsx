@@ -40,6 +40,7 @@ import {
   Eye,
   Zap,
   Banknote,
+  X,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GenerateInvoice from "./GenerateInvoice";
@@ -181,20 +182,20 @@ export const InvoiceGenerator = () => {
     }
   }, [toast]);
 
-  const generateSmartSuggestions = () => {
-    const suggestions = [
-      "Screen protector for iPhone 15 Pro Max - ₦5,000",
-      "Phone case for iPhone 15 Pro Max - ₦12,000",
-      "Lightning to USB-C cable - ₦8,000",
-      "Wireless charging pad - ₦15,000",
-      "Extended warranty service - ₦25,000",
-    ];
-    setSmartSuggestions(suggestions);
-    toast({
-      title: "Smart Suggestions Generated",
-      description: "AI has analyzed your items and found relevant add-ons",
-    });
-  };
+  // const generateSmartSuggestions = () => {
+  //   const suggestions = [
+  //     "Screen protector for iPhone 15 Pro Max - ₦5,000",
+  //     "Phone case for iPhone 15 Pro Max - ₦12,000",
+  //     "Lightning to USB-C cable - ₦8,000",
+  //     "Wireless charging pad - ₦15,000",
+  //     "Extended warranty service - ₦25,000",
+  //   ];
+  //   setSmartSuggestions(suggestions);
+  //   toast({
+  //     title: "Smart Suggestions Generated",
+  //     description: "AI has analyzed your items and found relevant add-ons",
+  //   });
+  // };
 
   const addSmartSuggestion = (suggestion: string) => {
     const [description, priceStr] = suggestion.split(" - ₦");
@@ -721,7 +722,7 @@ export const InvoiceGenerator = () => {
                 <CardTitle>Items/Services</CardTitle>
                 <div className="flex flex-wrap gap-2">
                   <Button
-                    onClick={generateSmartSuggestions}
+                    onClick={() => setShowAuthModal(!showAuthModal)}
                     size="sm"
                     variant="outline"
                   >
@@ -735,6 +736,24 @@ export const InvoiceGenerator = () => {
                 </div>
               </div>
             </CardHeader>
+            {showAuthModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+                <div className="relative bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+                  <Button
+                    onClick={() => setShowAuthModal(false)}
+                    className="absolute top-3 right-3 p-1 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full"
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+
+                  <div className="text-center">
+                    <h3 className="text-xl font-semibold mb-4">
+                      Coming Soon..
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
             <CardContent>
               <div className="overflow-x-auto">
                 <Table>
