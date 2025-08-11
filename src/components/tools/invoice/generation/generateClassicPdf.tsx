@@ -33,11 +33,8 @@ const formatCurrency = (amount: number | null | undefined): string => {
 const formatDate = (date: Date): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
+    month: "long",
+    day: "numeric",
   };
   return date.toLocaleDateString("en-US", options);
 };
@@ -47,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#FFFFFF",
     padding: 20,
-    fontFamily: "Courier",
+    fontFamily: "Helvetica",
   },
   headerContainer: {
     flexDirection: "row",
@@ -63,49 +60,54 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: "bold",
     color: colors.black,
-    marginBottom: 2,
+    marginBottom: 2, // Keep tight to the border
   },
   invoiceTitleUnderline: {
     borderBottomColor: colors.black,
     borderBottomWidth: 1.5,
-    width: "40%",
-    alignSelf: "flex-start",
-    marginTop: 0,
+    width: "40%", // Reverted to original percentage width
+    alignSelf: "flex-start", // Ensures it aligns with left-aligned text
+    marginTop: 0, // Keep tight to the text
     marginBottom: 7.5,
   },
   headerRight: {
     width: "35%",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center", // Changed to center to center the logo
   },
-  businessInfoWrapper: {
-    flexDirection: "row",
+  // Updated: Container for centered logo
+  logoContainer: {
+    flexDirection: "column",
     alignItems: "center",
-    marginBottom: 2,
+    marginBottom: 8,
   },
+  // Updated: Style for the centered logo image
   logo: {
-    width: 25,
-    height: 25,
-    marginRight: 5,
-    objectFit: "contain",
+    width: 40, // Increased size for better visibility
+    height: 40, // Increased size for better visibility
+    marginBottom: 5, // Space between logo and business name
+    objectFit: "contain", // Ensures the image fits within the bounds without distortion
   },
   businessName: {
     fontSize: 12,
     fontWeight: "bold",
     color: colors.black,
+    textAlign: "center", // Center the business name under the logo
+    marginBottom: 2,
   },
   businessNameUnderline: {
     borderBottomColor: colors.black,
     borderBottomWidth: 0.75,
-    width: "100%",
-    alignSelf: "flex-start",
-    marginTop: 0,
+    width: "100%", // Reverted to original percentage width
+    alignSelf: "center", // Center the underline
+    marginTop: 0, // Keep tight to the text
     marginBottom: 4.5,
   },
   businessInfo: {
     fontSize: 9,
     color: colors.gray600,
     marginBottom: 1.5,
+    textAlign: "center", // Center align business info
   },
 
   section: {
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   descriptionColHeader: {
-    width: "40%",
+    width: "40%", // Adjusted for new column
     fontSize: 10.5,
     fontWeight: "bold",
     paddingLeft: 6,
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   qtyColHeader: {
-    width: "15%",
+    width: "15%", // Adjusted for new column
     fontSize: 10.5,
     fontWeight: "bold",
     paddingLeft: 6,
@@ -159,18 +161,19 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   unitPriceColHeader: {
+    // NEW STYLE
     width: "20%",
     fontSize: 10.5,
     fontWeight: "bold",
-    textAlign: "right",
+    textAlign: "right", // Aligned right for numbers
     paddingRight: 6,
     color: colors.black,
   },
   priceColHeader: {
-    width: "25%",
+    width: "25%", // Adjusted for new column (line total)
     fontSize: 10.5,
     fontWeight: "bold",
-    textAlign: "right",
+    textAlign: "right", // Aligned right for numbers
     paddingRight: 6,
     color: colors.black,
   },
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.375,
   },
   descriptionCol: {
-    width: "40%",
+    width: "40%", // Adjusted for new column
     fontSize: 9,
     paddingLeft: 6,
     color: colors.black,
@@ -189,24 +192,25 @@ const styles = StyleSheet.create({
     wordWrap: "break-word",
   },
   qtyCol: {
-    width: "15%",
+    width: "15%", // Adjusted for new column
     fontSize: 9,
     paddingLeft: 6,
     color: colors.black,
     textAlign: "left",
   },
   unitPriceCol: {
+    // NEW STYLE
     width: "20%",
     fontSize: 9,
-    textAlign: "right",
+    textAlign: "right", // Aligned right for numbers
     paddingRight: 6,
     color: colors.black,
     wordWrap: "break-word",
   },
   priceCol: {
-    width: "25%",
+    width: "25%", // Adjusted for new column (line total)
     fontSize: 9,
-    textAlign: "right",
+    textAlign: "right", // Aligned right for numbers
     paddingRight: 6,
     color: colors.black,
     wordWrap: "break-word",
@@ -291,8 +295,8 @@ export const ClassicInvoiceDocument: React.FC<ClassicInvoiceDocumentProps> = ({
           </View>
 
           <View style={styles.headerRight}>
-            <View style={styles.businessInfoWrapper}>
-              {data.businessLogo && (
+            <View style={styles.logoContainer}>
+              {data.businessLogo && ( // Conditionally render logo
                 <Image src={data.businessLogo} style={styles.logo} />
               )}
               <Text style={styles.businessName}>{data.businessName}</Text>
@@ -314,21 +318,23 @@ export const ClassicInvoiceDocument: React.FC<ClassicInvoiceDocumentProps> = ({
           <Text style={styles.text}>
             Invoice Date: {formatDate(new Date())}
           </Text>
-          <View style={styles.smallUnderline} />
-          <Text style={styles.businessInfo}>
+          <Text style={styles.text}>
             {data.invoiceType === "invoice"
               ? "Invoice Number: "
               : "Receipt Number: "}
             {data.businessIdentifierNumber}
           </Text>
+          <View style={styles.smallUnderline} />
         </View>
 
         <View style={styles.table}>
           <View style={styles.tableHeaderRow}>
             <Text style={styles.descriptionColHeader}>Description</Text>
             <Text style={styles.qtyColHeader}>Quantity</Text>
-            <Text style={styles.unitPriceColHeader}>Unit Price</Text>
-            <Text style={styles.priceColHeader}>Price</Text>
+            <Text style={styles.unitPriceColHeader}>Unit Price</Text>{" "}
+            {/* NEW HEADER */}
+            <Text style={styles.priceColHeader}>Price</Text>{" "}
+            {/* This is now line total */}
           </View>
 
           {data.items.map((item, index) => (
@@ -337,10 +343,12 @@ export const ClassicInvoiceDocument: React.FC<ClassicInvoiceDocumentProps> = ({
               <Text style={styles.qtyCol}>{item.quantity}</Text>
               <Text style={styles.unitPriceCol}>
                 {formatCurrency(item.unit_price)}
-              </Text>
+              </Text>{" "}
+              {/* NEW CELL */}
               <Text style={styles.priceCol}>
                 {formatCurrency((item.unit_price ?? 0) * (item.quantity ?? 0))}
-              </Text>
+              </Text>{" "}
+              {/* Calculated line total */}
             </View>
           ))}
         </View>
