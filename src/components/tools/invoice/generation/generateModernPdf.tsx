@@ -9,12 +9,13 @@ import {
   Link,
   Image, // Import Image component
 } from "@react-pdf/renderer";
-
+// Assuming InvoiceItem is imported or defined consistently from InvoiceGenerator.tsx
+// It's better to have a dedicated types file, but for this example, aligning with how it's used.
 export interface InvoiceItem {
   id: string;
   description: string;
   quantity: number | null;
-  unit_price: number | null;
+  unit_price: number | null; // This is the actual unit price
 }
 
 export interface InvoiceData {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 25,
     right: -50,
-    backgroundColor: "#333333",
+    backgroundColor: "#e74c3c",
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
@@ -52,333 +53,188 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   logoBox: {
-    width: 120,
-    height: 70,
-    marginBottom: 15,
-    marginLeft: "auto",
-    marginRight: "auto",
+    width: "100%",
+    height: 60,
+    marginBottom: 8,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffff",
-    border: "3px solid #000000",
   },
   page: {
     flexDirection: "column",
     backgroundColor: "#FFFFFF",
-    padding: 40,
+    padding: 25,
     fontFamily: "Helvetica",
-    border: "2px solid #000000",
   },
   header: {
-    marginBottom: 30,
+    marginBottom: 20,
     textAlign: "center",
-    paddingBottom: 20,
-    borderBottomColor: "#000000",
-    borderBottomWidth: 3,
   },
+  // NEW: Style for container holding logo and business name
   headerContent: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
+    alignItems: "center", // Vertically center content
+    justifyContent: "center", // Horizontally center content
+    marginBottom: 5,
   },
+  // NEW: Style for the logo image
   logo: {
-    width: 50,
+    width: 80,
     height: 50,
-    marginRight: 15,
     objectFit: "contain",
   },
   businessName: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: "bold",
-    color: "#000000",
-    marginBottom: 10,
-    letterSpacing: 2,
-    textTransform: "uppercase",
+    marginBottom: 5,
   },
   businessInfo: {
-    fontSize: 12,
+    fontSize: 10,
     marginBottom: 3,
-    color: "#333333",
-    lineHeight: 1.4,
-    fontWeight: "500",
   },
   invoiceTitle: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: "bold",
-    marginTop: 15,
-    marginBottom: 0,
-    color: "#ffffff",
-    backgroundColor: "#000000",
-    padding: 15,
-    textAlign: "center",
-    letterSpacing: 3,
-    textTransform: "uppercase",
-  },
-  section: {
-    marginBottom: 20,
-    backgroundColor: "#f8f8f8",
-    padding: 20,
-    border: "2px solid #e0e0e0",
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    marginBottom: 10,
-    color: "#000000",
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    borderBottomColor: "#000000",
-    borderBottomWidth: 2,
+    marginTop: 10,
+    marginBottom: 5,
+    borderBottomColor: "#808080",
+    borderBottomWidth: 1,
     paddingBottom: 5,
   },
-  text: {
-    fontSize: 11,
+  section: {
+    marginBottom: 10,
+  },
+  sectionTitle: {
+    fontSize: 10,
+    fontWeight: "bold",
     marginBottom: 4,
-    lineHeight: 1.4,
-    color: "#333333",
+  },
+  text: {
+    fontSize: 10,
+    marginBottom: 2,
   },
   infoLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "bold",
-    marginRight: 8,
-    color: "#000000",
-    minWidth: 70,
+    marginRight: 4,
   },
   infoPaymentLabel: {
-    fontSize: 12,
-    fontWeight: "bold",
-    marginRight: 8,
-    color: "#000000",
-    minWidth: 100,
+    fontSize: 10,
+    fontWeight: "normal",
+    marginRight: 4,
   },
   infoValue: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "normal",
-    color: "#333333",
-    flex: 1,
   },
   infoRow: {
     flexDirection: "row",
-    marginBottom: 5,
-    alignItems: "flex-start",
+    marginBottom: 2,
   },
   table: {
     width: "100%",
-    borderWidth: 3,
-    borderColor: "#000000",
-    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#bfbfbf",
   },
   tableHeaderRow: {
     flexDirection: "row",
-    backgroundColor: "#000000",
-    borderBottomWidth: 3,
-    borderColor: "#000000",
+    backgroundColor: "#f0f0f0",
+    borderBottomWidth: 1,
+    borderColor: "#bfbfbf",
   },
   tableRow: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#e0e0e0",
-    minHeight: 40,
+    borderColor: "#bfbfbf",
   },
   tableEvenRow: {
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#f9f9f9",
   },
   tableColHeader: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: "bold",
-    padding: 15,
-    color: "#ffffff",
-    textAlign: "center",
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
+    padding: 5,
   },
   tableCol: {
-    fontSize: 11,
-    padding: 15,
-    color: "#333333",
-    display: "flex",
-    alignItems: "center",
+    fontSize: 9,
+    padding: 5,
   },
+  // Updated column widths for 4 columns: Description, Quantity, Unit Price, Total Price
   descriptionColHeader: {
-    width: "40%",
+    width: "40%", // Reduced from 50%
     textAlign: "left",
   },
   descriptionCol: {
-    width: "40%",
+    width: "40%", // Reduced from 50%
     textAlign: "left",
-    fontWeight: "600",
-    color: "#000000",
   },
   qtyColHeader: {
-    width: "15%",
-    textAlign: "center",
+    width: "15%", // Adjusted from 20%
+    textAlign: "left",
   },
   qtyCol: {
-    width: "15%",
-    textAlign: "center",
-    fontWeight: "600",
+    width: "15%", // Adjusted from 20%
+    textAlign: "left",
   },
   unitPriceColHeader: {
+    // NEW STYLE
     width: "20%",
-    textAlign: "center",
+    textAlign: "left",
   },
   unitPriceCol: {
+    // NEW STYLE
     width: "20%",
-    textAlign: "center",
-    fontWeight: "600",
+    textAlign: "left",
   },
   priceColHeader: {
-    width: "25%",
-    textAlign: "right",
+    width: "25%", // Adjusted from 30% for the total price column
+    textAlign: "right", // Align right for numbers
   },
   priceCol: {
-    width: "25%",
-    textAlign: "right",
-    fontWeight: "bold",
-    color: "#000000",
+    width: "25%", // Adjusted from 30% for the total price column
+    textAlign: "right", // Align right for numbers
   },
   totalsContainer: {
     flexDirection: "column",
-    alignSelf: "flex-end",
-    width: "70%",
-    marginTop: 15,
-    marginBottom: 20,
-    backgroundColor: "#ffffff",
-    padding: 20,
-    border: "3px solid #000000",
+    alignSelf: "flex-start", // Adjusted to align left
+    width: "50%", // Still occupies half width
+    marginTop: 5,
+    marginBottom: 10,
   },
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 8,
-    paddingBottom: 5,
-    borderBottomColor: "#e0e0e0",
-    borderBottomWidth: 1,
+    marginBottom: 3,
   },
   totalLabel: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#333333",
-    textTransform: "uppercase",
+    fontSize: 10,
+    fontWeight: "bold",
   },
   totalValue: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#333333",
-  },
-  grandTotalRow: {
-    borderTopWidth: 3,
-    borderTopColor: "#000000",
-    paddingTop: 10,
-    marginTop: 10,
-    backgroundColor: "#000000",
-    color: "#ffffff",
-    marginHorizontal: -20,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
-  grandTotalLabel: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#ffffff",
-    textTransform: "uppercase",
-    letterSpacing: 1,
+    fontSize: 10,
+    fontWeight: "normal",
   },
   grandTotalValue: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
-  thankYou: {
-    fontSize: 36,
-    fontWeight: "bold",
-    marginTop: 25,
-    marginBottom: 20,
-    textAlign: "center",
-    color: "#000000",
-    backgroundColor: "#f0f0f0",
-    padding: 20,
-    border: "3px solid #000000",
-    letterSpacing: 4,
-    textTransform: "uppercase",
-  },
-  footer: {
-    fontSize: 10,
-    color: "#666666",
-    marginTop: "auto",
-    textAlign: "center",
-    paddingTop: 20,
-    borderTopColor: "#000000",
-    borderTopWidth: 2,
-    backgroundColor: "#f8f8f8",
-    padding: 15,
-  },
-  link: {
-    color: "#333333",
-    textDecoration: "underline",
-    fontWeight: "600",
-  },
-  ctaContainer: {
-    marginTop: 30,
-    marginBottom: 15,
-    padding: 20,
-    backgroundColor: "#f0f0f0",
-    border: "2px solid #000000",
-    alignItems: "center",
-  },
-  ctaTitle: {
-    color: "#000000",
     fontSize: 14,
     fontWeight: "bold",
+  },
+  thankYou: {
+    fontSize: 26,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  footer: {
+    fontSize: 8,
+    color: "#808080",
+    marginTop: "auto",
     textAlign: "center",
-    marginBottom: 8,
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
+    paddingTop: 10,
+    borderTopColor: "#808080",
+    borderTopWidth: 0.5,
   },
-  ctaSubtitle: {
-    color: "#333333",
-    fontSize: 11,
-    textAlign: "center",
-    marginTop: 5,
-    fontWeight: "500",
-  },
-  cardsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 15,
-    marginBottom: 25,
-    gap: 15,
-  },
-  featureCard: {
-    padding: 15,
-    width: 120,
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    border: "2px solid #000000",
-    marginHorizontal: 5,
-  },
-  cardIcon: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
-    color: "#000000",
-  },
-  cardTitle: {
-    fontSize: 11,
-    textAlign: "center",
-    marginBottom: 5,
-    fontWeight: "bold",
-    color: "#000000",
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
-  },
-  cardDescription: {
-    fontSize: 9,
-    textAlign: "center",
-    lineHeight: 1.3,
-    color: "#333333",
+  link: {
+    color: "blue",
+    textDecoration: "underline",
   },
 });
 
@@ -389,7 +245,7 @@ const formatCurrency = (amount: number | null | undefined): string => {
   return `N${amount.toLocaleString("en-US", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  })}`;
+  })} `;
 };
 
 interface InvoiceDocumentProps {
@@ -405,29 +261,27 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
     <Document>
       <Page size="A5" style={styles.page} wrap>
         <View style={styles.header}>
+          {/* Logo centered above business name */}
           {data.businessLogo && (
             <View style={styles.logoBox}>
-              <Image
-                src={data.businessLogo}
-                style={{ width: 100, height: 50, objectFit: "contain" }}
-              />
+              <Image src={data.businessLogo} style={styles.logo} />
             </View>
           )}
           <Text style={styles.businessName}>{data.businessName}</Text>
           <Text style={styles.businessInfo}>{data.businessAddress}</Text>
           <Text style={styles.businessInfo}>Phone: {data.businessPhone}</Text>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              {data.invoiceType === "invoice" ? "Invoice #:" : "Receipt #:"}
-            </Text>
-            <Text style={styles.infoValue}>
-              {data.businessIdentifierNumber}
-            </Text>
-          </View>
+          <Text style={styles.businessInfo}>
+            {data.invoiceType === "invoice"
+              ? "Invoice Number: "
+              : "Receipt Number: "}
+            {data.businessIdentifierNumber}
+          </Text>
+          <Text style={styles.invoiceTitle}>
+            {data.invoiceType === "invoice" ? "Invoice" : "Receipt"}
+          </Text>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Customer Information</Text>
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Customer:</Text>
             <Text style={styles.infoValue}>{data.customerName}</Text>
@@ -448,14 +302,16 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
               Description
             </Text>
             <Text style={[styles.tableColHeader, styles.qtyColHeader]}>
-              Qty
+              Quantity
             </Text>
             <Text style={[styles.tableColHeader, styles.unitPriceColHeader]}>
               Unit Price
-            </Text>
+            </Text>{" "}
+            {/* NEW HEADER */}
             <Text style={[styles.tableColHeader, styles.priceColHeader]}>
-              Total Price
-            </Text>
+              Price
+            </Text>{" "}
+            {/* This is now line total */}
           </View>
 
           {data.items.map((item: InvoiceItem, index: number) => (
@@ -474,15 +330,17 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
               </Text>
               <Text style={[styles.tableCol, styles.unitPriceCol]}>
                 {formatCurrency(item.unit_price)}
-              </Text>
+              </Text>{" "}
+              {/* NEW CELL */}
               <Text style={[styles.tableCol, styles.priceCol]}>
                 {formatCurrency((item.unit_price ?? 0) * (item.quantity ?? 0))}
-              </Text>
+              </Text>{" "}
+              {/* Calculated line total */}
             </View>
           ))}
         </View>
 
-        <View style={{ flexDirection: "column", marginTop: 15 }}>
+        <View style={{ flexDirection: "column", marginTop: 5 }}>
           <View style={styles.totalsContainer}>
             <View style={styles.totalRow}>
               <Text style={styles.totalLabel}>Subtotal:</Text>
@@ -508,8 +366,8 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
                 {formatCurrency(data.tax ?? 0)}
               </Text>
             </View>
-            <View style={[styles.totalRow, styles.grandTotalRow]}>
-              <Text style={styles.grandTotalLabel}>TOTAL:</Text>
+            <View style={styles.totalRow}>
+              <Text style={styles.totalLabel}>Total:</Text>
               <Text style={styles.grandTotalValue}>
                 {formatCurrency(data.total)}
               </Text>
@@ -533,48 +391,172 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
               </View>
             </View>
           ) : (
-            <Text style={styles.thankYou}>THANK YOU!</Text>
+            <Text style={styles.thankYou}>Thank you!</Text>
           )}
         </View>
 
+        {/* Call to action for login/signup if not logged in - message and three card design */}
         {showLoginCta && (
           <>
-            <View style={styles.ctaContainer}>
-              <Text style={styles.ctaTitle}>
+            <View
+              style={{
+                marginTop: 24,
+                marginBottom: 8,
+                padding: 10,
+                backgroundColor: "#fffbe6",
+                border: "1px solid #ffe58f",
+                borderRadius: 6,
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#ad6800",
+                  fontSize: 12,
+                  fontWeight: "bold",
+                  textAlign: "center",
+                }}
+              >
                 Please sign up or log in to save your invoice or receipt
                 securely.
               </Text>
-              <Text style={styles.ctaSubtitle}>
+              <Text
+                style={{
+                  color: "#ad6800",
+                  fontSize: 10,
+                  textAlign: "center",
+                  marginTop: 4,
+                }}
+              >
                 Visit https://bizengo.com/auth/signup or
                 https://bizengo.com/auth/login
               </Text>
             </View>
-            <View style={styles.cardsContainer}>
-              <View style={styles.featureCard}>
-                <Text style={styles.cardIcon}>QR</Text>
-                <Text style={styles.cardTitle}>QR Generation</Text>
-                <Text style={styles.cardDescription}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginTop: 8,
+                marginBottom: 16,
+                gap: 8,
+              }}
+            >
+              {/* QR Generation Card */}
+              <View
+                style={{
+                  backgroundColor: "#e6f0fa",
+                  borderRadius: 8,
+                  padding: 10,
+                  width: 120,
+                  alignItems: "center",
+                  border: "1px solid #b6d4fa",
+                  marginRight: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: "#2563eb",
+                    fontWeight: "bold",
+                    marginBottom: 4,
+                  }}
+                >
+                  QR
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "#2563eb",
+                    textAlign: "center",
+                    marginBottom: 2,
+                  }}
+                >
+                  QR Generation
+                </Text>
+                <Text
+                  style={{ fontSize: 8, color: "#2563eb", textAlign: "center" }}
+                >
                   Scan QR code to get invoice/receipt.
                 </Text>
               </View>
-              <View style={styles.featureCard}>
-                <Text style={styles.cardIcon}>AI</Text>
-                <Text style={styles.cardTitle}>Smart Suggestions</Text>
-                <Text style={styles.cardDescription}>
+              {/* Smart Suggestions Card */}
+              <View
+                style={{
+                  backgroundColor: "#e6fae6",
+                  borderRadius: 8,
+                  padding: 10,
+                  width: 120,
+                  alignItems: "center",
+                  border: "1px solid #b6fab6",
+                  marginRight: 8,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: "#059669",
+                    fontWeight: "bold",
+                    marginBottom: 4,
+                  }}
+                >
+                  AI
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "#059669",
+                    textAlign: "center",
+                    marginBottom: 2,
+                  }}
+                >
+                  Smart Suggestions
+                </Text>
+                <Text
+                  style={{ fontSize: 8, color: "#059669", textAlign: "center" }}
+                >
                   AI-powered item recommendations.
                 </Text>
               </View>
-              <View style={styles.featureCard}>
-                <Text style={styles.cardIcon}>PRO</Text>
-                <Text style={styles.cardTitle}>Professional Templates</Text>
-                <Text style={styles.cardDescription}>
+              {/* Professional Templates Card */}
+              <View
+                style={{
+                  backgroundColor: "#f3e8ff",
+                  borderRadius: 8,
+                  padding: 10,
+                  width: 120,
+                  alignItems: "center",
+                  border: "1px solid #d1b3fa",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: "#7c3aed",
+                    fontWeight: "bold",
+                    marginBottom: 4,
+                  }}
+                >
+                  PRO
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "#7c3aed",
+                    textAlign: "center",
+                    marginBottom: 2,
+                  }}
+                >
+                  Professional Templates
+                </Text>
+                <Text
+                  style={{ fontSize: 8, color: "#7c3aed", textAlign: "center" }}
+                >
                   Beautiful invoice designs.
                 </Text>
               </View>
             </View>
           </>
         )}
-
         <View style={styles.footer} fixed>
           <Text>Powered by Roots & Squares</Text>
           <Link src="https://bizengo.com/invoice-generator/">
@@ -588,6 +570,7 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
   );
 };
 
+// Pass showLoginCta=true to show the call to action if user is not logged in
 export const generateModernPdf = async (
   data: InvoiceData,
   showLoginCta: boolean = false
