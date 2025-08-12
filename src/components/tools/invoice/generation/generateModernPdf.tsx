@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end", // Changed from "center" to "flex-end" for right alignment
   },
   page: {
     flexDirection: "column",
@@ -261,7 +261,7 @@ export const InvoiceDocument: React.FC<InvoiceDocumentProps> = ({
     <Document>
       <Page size="A5" style={styles.page} wrap>
         <View style={styles.header}>
-          {/* Logo centered above business name */}
+          {/* Logo right-aligned above business name */}
           {data.businessLogo && (
             <View style={styles.logoBox}>
               <Image src={data.businessLogo} style={styles.logo} />

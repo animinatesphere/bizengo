@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 15, // Keep original top margin
+    marginTop: 12, // Keep original top margin
     marginBottom: 4, // Keep original bottom margin
   },
   // NEW: Style for the logo image
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     height: 35, // Adjust size as needed
     marginRight: 10, // Space between logo and text
     objectFit: "contain", // Ensures the image fits within the bounds without distortion
+    marginTop: "-2",
   },
   businessName: {
     fontSize: 18,
